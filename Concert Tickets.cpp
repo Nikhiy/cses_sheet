@@ -6,9 +6,17 @@ int main(){
     vector<int> a(n),b(m);
     for(int i=0;i<n;i++) cin>>a[i];
     for(int i=0;i<m;i++) cin>>b[i];
-    sort(a.begin(),a.end());
-    vector<int> ans(m,-1);
-    
-    for(int k=0;k<m;k++) cout<<ans[k]<<' ';
+    multiset<int> st;
+    for(auto it:a) st.insert(it);
+    for(int i=0;i<m;i++){
+        auto it=st.upper_bound(b[i]);
+        if(it==st.begin()){
+            cout<<-1<<'\n';
+            continue;
+        }
+        --it;
+        cout<<*it<<'\n';
+        st.erase(it);
+    }
     return 0;
 }
