@@ -10,6 +10,7 @@ class SGTree{
     void build(int ind,int low,int high,vector<int>& arr){
         if(low==high){
             seg[ind]=arr[left];
+            return;
         }
         int mid=(low+high)/2;
         build(2*ind+1,low,mid,arr);
@@ -41,7 +42,7 @@ class SGTree{
         }
         //partial overlap case
         int mid=(low+high)/2;
-        update(2*ind+1,low,mid,l,r,val);
+        update(2*ind+1,low,mid,l,r,val); 
         update(2*ind+2,mid+1,high,l,r,val);
         seg[ind]=seg[2*ind+1]+seg[2*ind+2];
     }
@@ -56,7 +57,7 @@ class SGTree{
 			lazy[ind] = 0;
         }
         // no overlap return 0; 
-		if(high < l or r < low) {
+		if(high < l || r < low) {
 			return 0; 
         }
 		// complete overlap 
